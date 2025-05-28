@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Космічні Подорожі | Дослідження Галактики</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="min-h-screen">
+    <!-- Stars background -->
+    <div class="starfield"></div>
+
+    <!-- Navigation bar -->
+    <nav class="navbar fixed top-0 w-full py-4 z-50">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="text-2xl font-bold text-white space-mono mr-2">
+            <i class="fas fa-rocket mr-2 text-purple-400"></i>
+            <span class="text-gradient">КосмоПодорож</span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="nav-link hover-glow">Головна</a>
+          <a href="#catalog" class="nav-link hover-glow">Каталог</a>
+          <a href="#game" class="nav-link hover-glow">Гра</a>
+          <a href="#about" class="nav-link hover-glow">Про нас</a>
+          <button id="userGreetingBtn" class="cosmic-btn">
+            <i class="fas fa-user-astronaut mr-2"></i>Увійти
+          </button>
+        </div>
+
+        <!-- Mobile Navigation Trigger -->
+        <div class="md:hidden">
+          <button id="mobileMenuBtn" class="text-white">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile menu sidebar -->
+    <div id="mobileMenu" class="mobile-menu">
+      <button
+        id="closeMenuBtn"
+        class="absolute top-4 right-4 text-white text-2xl"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="flex flex-col space-y-6 text-lg">
+        <a href="#home" class="nav-link hover-glow">Головна</a>
+        <a href="#catalog" class="nav-link hover-glow">Каталог</a>
+        <a href="#game" class="nav-link hover-glow">Гра</a>
+        <a href="#about" class="nav-link hover-glow">Про нас</a>
+        <button id="mobileUserGreetingBtn" class="cosmic-btn">
+          <i class="fas fa-user-astronaut mr-2"></i>Увійти
+        </button>
+      </div>
+    </div>
+
+    <!-- User greeting modal -->
+    <div
+      id="userGreetingModal"
+      class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="bg-gradient-to-r from-purple-900 to-blue-900 p-8 rounded-lg max-w-md w-full"
+      >
+        <h3 class="text-2xl mb-4 font-bold text-center">
+          Представтеся, космонавте!
+        </h3>
+        <div class="space-y-4">
+          <div>
+            <label for="userName" class="block mb-2">Ваше ім'я:</label>
+            <input
+              type="text"
+              id="userName"
+              class="w-full p-3 bg-gray-800 border border-purple-500 rounded text-white"
+              placeholder="Введіть ваше ім'я"
+            />
+          </div>
+          <div class="flex justify-end space-x-4">
+            <button
+              id="cancelGreeting"
+              class="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600 transition"
+            >
+              Скасувати
+            </button>
+            <button id="submitGreeting" class="cosmic-btn">
+              Вперед до зірок!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen pt-24 pb-12 section active">
+      <div class="container mx-auto px-4">
+        <!-- Hero Section -->
+        <div class="flex flex-col items-center text-center mb-20">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Досліджуй <span class="text-purple-400">Космос</span> разом з нами
+            </h1>
+            <p class="text-xl mb-8 text-gray-300">
+              Відкрийте для себе найзахопливіші куточки всесвіту і вирушайте у
+              віртуальну космічну подорож.
+            </p>
+            <div
+              id="welcomeMessage"
+              class="mb-8 p-4 bg-gradient-to-r from-purple-900 to-blue-900 rounded-lg hidden"
+            >
+              <p class="text-xl" id="greetingText">
+                Вітаємо на борту, космонавте!
+              </p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="#catalog" class="nav-link cosmic-btn">
+                <i class="fas fa-meteor mr-2"></i>Дослідити
+              </a>
+              <a
+                href="#game"
+                class="nav-link bg-transparent border-2 border-purple-500 hover:border-purple-400 px-6 py-2 rounded-full transition"
+              >
+                <i class="fas fa-gamepad mr-2"></i>Зіграти в гру
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Categories Preview -->
+        <div class="scroll-fade">
+          <h2 class="text-3xl font-bold mb-10 text-center">
+            Популярні напрямки
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="cosmic-card p-6 flex flex-col items-center text-center">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg"
+                alt="Марс"
+                class="w-30 h-30 mb-4 planet-img"
+              />
+              <h3 class="text-xl font-bold mb-2">Марс</h3>
+              <p class="text-gray-300">
+                Червона планета чекає на вас! Дослідіть марсіанські долини та
+                каньйони.
+              </p>
+            </div>
+            <div class="cosmic-card p-6 flex flex-col items-center text-center">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg"
+                alt="Місяць"
+                class="w-30 h-30 mb-4 planet-img"
+              />
+              <h3 class="text-xl font-bold mb-2">Місяць</h3>
+              <p class="text-gray-300">
+                Насолоджуйтесь видами Землі з найближчого супутника.
+              </p>
+            </div>
+            <div class="cosmic-card p-6 flex flex-col items-center text-center">
+              <img
+                src="img/CHumatskyy-SHliakh.jpg"
+                alt="Чумацький Шлях"
+                class="w-30 h-30 mb-4 planet-img"
+              />
+              <h3 class="text-xl font-bold mb-2">Чумацький Шлях</h3>
+              <p class="text-gray-300">
+                Неймовірна подорож крізь зоряне небо та глибини нашої рідної
+                галактики.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="min-h-screen py-24 section">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-2 text-center">
+          Каталог космічних об'єктів
+        </h2>
+        <p class="text-gray-300 text-center mb-12">
+          Оберіть категорію для дослідження
+        </p>
+
+        <!-- Search functionality -->
+        <div class="mb-8">
+          <div class="max-w-lg mx-auto">
+            <div class="relative flex items-center">
+              <input
+                type="text"
+                id="searchInput"
+                class="w-full bg-gray-800 bg-opacity-50 p-3 pl-12 rounded-full border border-purple-500 text-white"
+                placeholder="Шукати по каталогу..."
+              />
+              <i class="fas fa-search absolute left-4 text-purple-400"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category tabs -->
+        <div class="mb-8 flex flex-wrap justify-center gap-2">
+          <button class="tab-btn active" data-category="all">
+            Всі категорії
+          </button>
+          <button class="tab-btn" data-category="planets">Планети</button>
+          <button class="tab-btn" data-category="moons">Супутники</button>
+          <button class="tab-btn" data-category="stars">Зірки</button>
+          <button class="tab-btn" data-category="galaxies">Галактики</button>
+          <button class="tab-btn" data-category="nebulae">Туманності</button>
+        </div>
+
+        <!-- Catalog items container -->
+        <div id="catalogItems" class="category-grid">
+          <!-- Items will be loaded from JSON -->
+          <div class="text-center py-10">
+            <div
+              class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"
+            ></div>
+            <p class="mt-4">Завантаження космічних об'єктів...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game" class="min-h-screen py-24 section">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-2">Космічна аркада</h2>
+        <p class="text-gray-300 mb-12">
+          Керуйте космічним кораблем та уникайте астероїдів!
+        </p>
+
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="bg-gradient-to-r from-purple-900 to-blue-900 p-6 rounded-lg shadow-lg mb-8"
+          >
+            <div>
+              <canvas
+                id="gameCanvas"
+                width="800"
+                height="600"
+                class="mx-auto"
+              ></canvas>
+              <div
+                id="gameControls"
+                class="mt-6 flex flex-wrap justify-center gap-4"
+              >
+                <button id="startGameBtn" class="cosmic-btn">
+                  <i class="fas fa-play mr-2"></i>Розпочати гру
+                </button>
+                <div>
+                  <span class="mr-4"
+                    >Рахунок: <span id="gameScore">0</span></span
+                  >
+                  <span>Рівень: <span id="gameLevel">1</span></span>
+                </div>
+              </div>
+              <div class="mt-4 text-left">
+                <h3 class="font-bold mb-2">Правила гри:</h3>
+                <ul class="list-disc pl-5 text-sm">
+                  <li>Використовуйте клавіші-стрілки для керування кораблем</li>
+                  <li>Уникайте зіткнень з астероїдами</li>
+                  <li>Збирайте космічні кристали для додаткових очків</li>
+                  <li>Кожні 500 очків ви переходите на новий рівень</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-screen py-24 section">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-2 text-center">Про проєкт</h2>
+        <p class="text-gray-300 text-center mb-12">
+          Командний проєкт з веб-програмування
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="cosmic-card p-8">
+            <h3 class="text-2xl font-bold mb-4">Технології проєкту</h3>
+            <ul class="space-y-4">
+              <li>
+                <div class="flex items-center">
+                  <i class="fab fa-html5 text-2xl mr-3 text-orange-500"></i>
+                  <div>
+                    <h4 class="font-bold">HTML5</h4>
+                    <p class="text-sm text-gray-300">
+                      Структура односторінкового застосунку
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <i class="fab fa-css3-alt text-2xl mr-3 text-blue-400"></i>
+                  <div>
+                    <h4 class="font-bold">CSS3 & Tailwind CSS</h4>
+                    <p class="text-sm text-gray-300">
+                      Стилізація та адаптивний дизайн
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <i class="fab fa-js text-2xl mr-3 text-yellow-400"></i>
+                  <div>
+                    <h4 class="font-bold">JavaScript</h4>
+                    <p class="text-sm text-gray-300">
+                      Інтерактивність, навігація та аркадна гра
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <i class="fas fa-database text-2xl mr-3 text-green-400"></i>
+                  <div>
+                    <h4 class="font-bold">JSON</h4>
+                    <p class="text-sm text-gray-300">
+                      Збереження та отримання даних про космічні об'єкти
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card p-8">
+            <h3 class="text-2xl font-bold mb-4">Наша команда</h3>
+            <p class="mb-6">
+              Цей проєкт створено в рамках командного завдання з
+              веб-програмування з використанням HTML, CSS та JavaScript без
+              застосування функціональних фреймворків.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-purple-900 bg-opacity-30 p-4 rounded-lg">
+                <h4 class="font-bold mb-2">Розробник Білий О. В.</h4>
+                <p class="text-sm text-gray-300">
+                  Фронтенд розробка, навігація, адаптивний дизайн, UX/UI дизайн,
+                  анімації, взаємодія з користувачем
+                </p>
+              </div>
+
+              <div class="bg-purple-900 bg-opacity-30 p-4 rounded-lg">
+                <h4 class="font-bold mb-2">Розробник Тарас А. І.</h4>
+                <p class="text-sm text-gray-300">
+                  Архітектура даних, JSON інтеграція, фільтрація, Аркадна гра,
+                  візуалізація
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Modal -->
+    <div
+      id="detailModal"
+      class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden overflow-y-auto"
+    >
+      <div
+        class="bg-gradient-to-r from-purple-900 to-blue-900 p-6 rounded-lg max-w-4xl w-full mx-4 my-8"
+      >
+        <div class="flex justify-between items-start mb-4">
+          <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+          <button id="closeModal" class="text-gray-300 hover:text-white">
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <img
+              id="modalImage"
+              src=""
+              alt="Космічний об'єкт"
+              class="w-full h-auto rounded"
+            />
+          </div>
+          <div>
+            <div id="modalDescription" class="mb-4 text-gray-300"></div>
+            <div id="modalDetails" class="space-y-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

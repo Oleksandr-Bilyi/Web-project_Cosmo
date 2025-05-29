@@ -6,7 +6,7 @@ let catalogDataLoaded = null;
 // Fetch catalog data from JSON file
 async function loadCatalogData() {
   return new Promise((resolve, reject) => {
-    fetch('./data/catalog.json')
+    fetch('data/catalog.json')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
